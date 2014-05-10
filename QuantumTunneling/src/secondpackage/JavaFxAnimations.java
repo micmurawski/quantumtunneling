@@ -1,4 +1,4 @@
-package pl.edu.pw.fizyka.pojava.murlip;
+package secondpackage;
 
 import java.util.List;
 import javafx.animation.PathTransition;

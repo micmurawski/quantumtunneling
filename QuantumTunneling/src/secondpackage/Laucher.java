@@ -1,4 +1,4 @@
-package pl.edu.pw.fizyka.pojava.murlip;
+package secondpackage;
 
 import javafx.application.Application;
 import javafx.stage.Stage;

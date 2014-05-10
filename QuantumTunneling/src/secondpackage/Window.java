@@ -5,7 +5,7 @@
  *
  */
 
-package pl.edu.pw.fizyka.pojava.murlip;
+package secondpackage;
 
 import javax.swing.JPanel;
 

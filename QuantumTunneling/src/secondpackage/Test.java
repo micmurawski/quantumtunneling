@@ -1,4 +1,4 @@
-package pl.edu.pw.fizyka.pojava.murlip;
+package secondpackage;
 
 import org.apache.commons.math3.complex.Complex;
 

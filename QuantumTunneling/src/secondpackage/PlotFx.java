@@ -1,4 +1,4 @@
-package pl.edu.pw.fizyka.pojava.murlip;
+package secondpackage;
 
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;

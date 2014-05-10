@@ -1,4 +1,4 @@
-package pl.edu.pw.fizyka.pojava.murlip;
+package secondpackage;
 import javafx.application.*;
 
 public class MyClass {
