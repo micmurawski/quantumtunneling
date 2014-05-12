@@ -61,13 +61,13 @@ public class PlotPanel extends JPanel{
         NumberAxis range = (NumberAxis) plot.getRangeAxis();
         range.setRange(0.0,0.3);
         range.setTickUnit(new NumberTickUnit(0.3));
-        ChartFrame frame=new ChartFrame("XYArea Chart",chart);
+        ChartFrame frame = new ChartFrame("XYArea Chart",chart);
 		
 	}
 	
 	void updateData(){
-		wave=new XYSeries("Prob");
-		potential= new XYSeries("Potential");
+		wave=new XYSeries("Y");
+		potential= new XYSeries("X");
 		
 		for(int ii=1;ii<f.getN();ii++){
 			wave.add(ii*0.1,f.getProbabilityDensity().get(ii));
@@ -76,6 +76,7 @@ public class PlotPanel extends JPanel{
 		dataset = new XYSeriesCollection();
 		dataset.addSeries(wave);
 		dataset.addSeries(potential);
+		chart= new
 	}
 		
 		
