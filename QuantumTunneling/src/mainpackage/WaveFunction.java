@@ -28,13 +28,13 @@ public class WaveFunction{
 	double A; // stala normaluzujaca do rownania paczki falowej
 	double L;	//długość fali
 	double B;	//pomocnicza stała	
-	public static final double h_bar=6.63e-34; //stała plancka
+	public static final double h_bar=1; //stała plancka
 	public static final double dt=0.1;	// interwał czasowy
 	public static final double dx=0.1;	// interwał przestrzenny	
 	int N;	//liczba podziałek
 	
 	
-	WaveFunction(double k, double m, double x0, double sigma,double L){
+	 public WaveFunction(double k, double m, double x0, double sigma,double L){
 		this.N=(int)(L/dx);
 		this.k=k;
 		this.t=0;
@@ -54,14 +54,12 @@ public class WaveFunction{
 		potential = new ArrayList<Double>();
 		
 		for(int ii=0; ii<N+1;ii++){
-			
-			waveFunction.add(null);
-			beta.add(null);
+			beta.add(new Complex(0,0));
 			potential.add(0.0);
-			U.add(null);
+			U.add(new Complex(0,0));
 			
 			B=A*Math.exp((double)(-((ii*dx)-x0)*((ii*dx)-x0))/(2*sigma*sigma));
-			waveFunction.set(ii ,new Complex(B*Math.cos(k),B*Math.sin(k)));
+			waveFunction.add(new Complex(B*Math.cos(k),B*Math.sin(k)));
 			U.set(ii,new Complex(0,0));
 			}
 		
@@ -72,23 +70,37 @@ public class WaveFunction{
 		return this.waveFunction;
 	}
 	
-	double[] getProbabilityDensity(){
-		double[] density = new double[(int)(L/N)+1]; 
+	public ArrayList<Double> getProbabilityDensity(){
+		ArrayList<Double> density = new ArrayList<Double>(); 
 		for(int ii=0;ii<N+1;ii++){
-			density[ii]=this.waveFunction.get(ii).abs();
+			density.add(ii,this.waveFunction.get(ii).abs());
 		}
 		return density;
 	}
 	
+	
+	public ArrayList<Double> getPotential(){
+		return potential;
+	}
+	
+	public int getN(){
+		return N;
+	}
+	
+	
+	
+	
 	public void setPotential(double x0, double a, double v0){
 		for(int ii=0;ii<this.N+1;ii++){
 			if((ii*dx)>=x0){
-				if(ii*dx<=x0+a){
-					potential.set(ii,v0);
+				if(ii*dx>=x0+a){
+					this.potential.set(ii,0.0);
 				}else{
-					potential.set(ii,0.0);
+					this.potential.set(ii,v0);
 				}
-				potential.set(ii,0.0);
+				
+				}else{
+					this.potential.set(ii,0.0);
 				}
 
 			}
@@ -109,13 +121,13 @@ public class WaveFunction{
 		waveFunction.set(1, U.get(1).divide(beta.get(1)));
 		
 		for(int jj=2;jj<N;jj++){
-			den.add(beta.get(jj).subtract(alpha.multiply(U.get(jj-1))));
+			den=(beta.get(jj).subtract(alpha.multiply(U.get(jj-1))));
 			waveFunction.set(jj,U.get(jj).subtract(alpha.multiply(waveFunction.get(jj-1).divide(den))));
 			U.set(jj, gamma.divide(den));
 		}
-		for(int kk=N;kk<1;kk--){
-			waveFunction.set(kk, waveFunction.get(kk).subtract(waveFunction.get(kk+1).multiply(U.get(kk))));
-		}
+		//for(int kk=N;kk<1;kk--){
+			//waveFunction.set(kk, waveFunction.get(kk).subtract(waveFunction.get(kk+1).multiply(U.get(kk))));
+		//}
 		t+=dt;
 		
 		
@@ -126,12 +138,19 @@ public class WaveFunction{
 	void setEnergy(double e0){
 		this.k=Math.sqrt(2*this.m*e0)/h_bar;
 	}
-	
+
 	double getTime(){
 		return t;
 	}
 	
-
+public static void main(String[] args){
+	WaveFunction test = new WaveFunction(10,10,10,10,10);
+	test.setPotential(50, 10, 10);
+	test.evolution();
+	System.out.println(test.getProbabilityDensity().get(100)+" "+test.N+" "+test.gamma+" \n"+test.alpha);
+	for(int i=10;i<100;i++)
+	System.out.println(test.U.get(i));
+}
 	
 
 }
