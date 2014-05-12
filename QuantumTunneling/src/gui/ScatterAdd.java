@@ -1,5 +1,4 @@
 package gui;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -28,7 +27,7 @@ import org.jfree.data.xy.XYSeriesCollection;
 public class ScatterAdd extends JFrame {
 
     private static final int N = 8;
-    private static final String title = " ";
+    private static final String title = "Scatter Add Demo";
     private static final Random rand = new Random();
     private XYSeries added = new XYSeries("Added");
 
@@ -37,11 +36,20 @@ public class ScatterAdd extends JFrame {
         final ChartPanel chartPanel = createDemoPanel();
         this.add(chartPanel, BorderLayout.CENTER);
         JPanel control = new JPanel();
-   
+        control.add(new JButton(new AbstractAction("Add") {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                for (int i = 0; i < N; i++) {
+                    added.add(rand.nextDouble(), rand.nextDouble());
+                }
+            }
+        }));
+        this.add(control, BorderLayout.SOUTH);
     }
 
     private ChartPanel createDemoPanel() {
-        JFreeChart jfreechart = ChartFactory.createLineChart(
+        JFreeChart jfreechart = ChartFactory.createScatterPlot(
             title, "X", "Y", createSampleData(),
             PlotOrientation.VERTICAL, true, true, false);
         XYPlot xyPlot = (XYPlot) jfreechart.getPlot();
@@ -50,12 +58,12 @@ public class ScatterAdd extends JFrame {
         XYItemRenderer renderer = xyPlot.getRenderer();
         renderer.setSeriesPaint(0, Color.blue);
         NumberAxis domain = (NumberAxis) xyPlot.getDomainAxis();
-        domain.setRange(0.00, 100.00);
-        domain.setTickUnit(new NumberTickUnit(10));
+        domain.setRange(0.00, 1.00);
+        domain.setTickUnit(new NumberTickUnit(0.1));
         domain.setVerticalTickLabels(true);
         NumberAxis range = (NumberAxis) xyPlot.getRangeAxis();
-        range.setRange(0.0, 100.00);
-        range.setTickUnit(new NumberTickUnit(10));
+        range.setRange(0.0, 1.0);
+        range.setTickUnit(new NumberTickUnit(0.1));
         return new ChartPanel(jfreechart);
     }
 
@@ -72,7 +80,7 @@ public class ScatterAdd extends JFrame {
         return xySeriesCollection;
     }
 
-    public static void main(String args[]) {title, cxisLabel, valueAxisLabel, dataset)(
+    public static void main(String args[]) {
         EventQueue.invokeLater(new Runnable() {
 
             @Override

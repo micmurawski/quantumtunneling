@@ -76,7 +76,7 @@ public class PlotPanel extends JPanel{
 		dataset = new XYSeriesCollection();
 		dataset.addSeries(wave);
 		dataset.addSeries(potential);
-		chart= new
+
 	}
 		
 		
