@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/Michał/Desktop/commons-math3-3.2/commons-math3-3.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Michał/Desktop/miglayout-4.0-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Michał/Desktop/jfreechart-1.0.17/lib/jfreechart-1.0.17.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Michał/Desktop/jfreechart-1.0.17/lib/jcommon-1.0.21.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
