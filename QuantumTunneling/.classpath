@@ -6,5 +6,6 @@
 	<classpathentry kind="lib" path="C:/Users/Michał/Desktop/miglayout-4.0-sources.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Michał/Desktop/jfreechart-1.0.17/lib/jfreechart-1.0.17.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Michał/Desktop/jfreechart-1.0.17/lib/jcommon-1.0.21.jar"/>
+	<classpathentry kind="lib" path="miglayout15-swing.jar" sourcepath="miglayout-src.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

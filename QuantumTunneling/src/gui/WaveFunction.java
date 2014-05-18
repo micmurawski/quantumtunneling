@@ -41,7 +41,7 @@ public class WaveFunction{
 	int N;	//liczba podziałek
 	
 	
-	 public WaveFunction(double e0, double m, double x0, double sigma,double L){
+	 public WaveFunction(double e0, double m, double sigma, double x0,double L){
 		this.N=(int)(L/dx);
 		this.k=Math.sqrt(2*m*e0/(h_bar*h_bar));
 		this.t=0;
@@ -151,24 +151,24 @@ public class WaveFunction{
 		this.k=Math.sqrt(2*this.m*e0)/h_bar;
 	}
 
-	double getTime(){
+	public double getTime(){
 		return t;
 	}
 	
-	XYSeries seriesWave(){
+	public XYSeries seriesWave(){
 		XYSeries data= new XYSeries("Wave");
 		for(int ii=0;ii<waveFunction.size();ii++)
 			data.add(ii*dx,this.getProbabilityDensity(ii));
 		return data;
 	}
-	XYSeries seriesPotential(){
+	public XYSeries seriesPotential(){
 		XYSeries data= new XYSeries("Potential");
 		for(int ii=0;ii<potential.size();ii++)
-			data.add(ii*dx,this.getPotential(ii));
+			data.add(ii*dx,this.getPotential(ii)/1.60217657e-19);
 		return data;
 	}
 	
-	JFreeChart Make(XYSeries S)
+	public JFreeChart Make(XYSeries S)
 	{
 		XYSeriesCollection collection = new XYSeriesCollection();
 			collection.addSeries(S);

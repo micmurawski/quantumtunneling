@@ -9,10 +9,10 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
 public class Plotter {
-	Plotter(){
+	public Plotter(){
 		
 	}
-	JFreeChart plot(XYSeries u, XYSeries d,String title){
+	public JFreeChart plot(XYSeries u, XYSeries d,String title){
 		XYSeriesCollection collection = new XYSeriesCollection();
 		collection.addSeries(u);
 		collection.addSeries(d);
