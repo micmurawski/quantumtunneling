@@ -6,6 +6,9 @@ import java.util.ResourceBundle;
 
 
 
+
+
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingWorker;
@@ -19,11 +22,13 @@ import javax.swing.border.EmptyBorder;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 
 import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 
 public class MainWindow extends JFrame {
 	/**
@@ -41,76 +46,58 @@ public class MainWindow extends JFrame {
 	AnimationProvider provider;
 	private JButton btnPlay;
 	Timer timer;
-	
-	class AnimationProvider extends SwingWorker<Integer,Integer>{
-		public AnimationProvider() {
-			// TODO Auto-generated constructor stub
-		}
-
-		@Override
-		protected Integer doInBackground() throws Exception {
-			getContentPane().remove(chartContainer);
-			f.evolution();
-			return null;
-		}
-		
-		protected void done(){
-			chart=plotter.plot(f.seriesWave(),f.seriesPotential(),"time: "+Double.toString(f.getTime()));
-			chartContainer = new ChartPanel(chart);
-			getContentPane().add(chartContainer, "cell 1 0,grow");
-			getContentPane().revalidate();
-			getContentPane().repaint();
-			
-		}
-	}
-
+	boolean isRunning,isSet;
+	XYSeriesCollection collection;
 	
 	
 	public MainWindow() {
 		super();
-	   	provider= new AnimationProvider();
+	   	//provider= new AnimationProvider();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 50, 1200, 500);
+		setBounds(100, 50, 1200, 600);
 		setResizable(false);
 		setTitle("Quantum Tunneling");
 		panel = new OptionPanel();
-		getContentPane().setLayout(new MigLayout("", "[361.00][811.00]", "[419.00]"));
-		
+		getContentPane().setLayout(new MigLayout("", "[361.00][811.00]", "[419.00][][]"));
 		panelContainer = new JPanel();
 		getContentPane().add(panelContainer, "cell 0 0,alignx left,aligny top");
 		panelContainer.add(panel);
+		f=new WaveFunction(new double[]{5.5,3.72,100,15,100});
+		f.setPotential(new double[]{10,50,5});
+		collection=plotter.collections(f.seriesWave(), f.seriesPotential(), 0);
+		
+		chart=plotter.plot(collection,"time: "+Double.toString(f.getTime()),100,"X","Y");
 		
 		
-		timer = new Timer(100, new ActionListener() {
+		timer = new Timer(30, new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
-		    	//provider.execute();
 		    	getContentPane().remove(chartContainer);
 				f.evolution();
-				chart=plotter.plot(f.seriesWave(),f.seriesPotential(),"time: "+Double.toString(f.getTime()));
-				chartContainer = new ChartPanel(chart);
-				getContentPane().add(chartContainer, "cell 1 0,grow");
-				getContentPane().revalidate();
-				getContentPane().repaint();
+				collection=plotter.collections(f.seriesWave(), f.seriesPotential(), 0);
+				//chart=plotter.plot(f.seriesWave(),f.seriesPotential(),50,"time: "+Double.toString(f.getTime()),100,"X","Y");
+				//chartContainer = new ChartPanel(chart);
+				//getContentPane().add(chartContainer, "cell 1 0,grow");
+				//getContentPane().revalidate();
+				//getContentPane().repaint();
 		    }
 		});  
+		
+		chartContainer = new ChartPanel(chart);
+		getContentPane().add(chartContainer, "cell 1 0,grow");
 		
 		
 		
 		btnPlay = new JButton("Play");
+		getContentPane().add(btnPlay, "cell 0 2");
 		btnPlay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				getContentPane().remove(chartContainer);
-				f=new WaveFunction(1, 1, 1, 10,100);
-				f.setPotential(50,10,1);
+				//f=new WaveFunction(panel.getVariablesWave());
+				//f.setPotential(panel.getVariablesPotential());
 				timer.start();
 				System.out.println("Play...");
-				System.out.println(panel.getVariable(0)+" "+panel.getVariable(1)+" "+panel.getVariable(2)+" "+panel.getVariable(3)+" "+panel.getVariable(4)+" "+panel.getVariable(5)+" "+panel.getVariable(6));
 			}
 		});
-		panel.add(btnPlay, "cell 0 14,alignx center");
-		
-		chartContainer = new ChartPanel(plotter.plot(new XYSeries("Wave"),new XYSeries("Potential"),"t: 0.0"));
-		getContentPane().add(chartContainer, "cell 1 0,grow");
 		
 	}
 	
