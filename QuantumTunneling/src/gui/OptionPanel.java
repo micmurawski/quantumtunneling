@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.plaf.SliderUI;
 import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
@@ -33,6 +34,8 @@ public class OptionPanel  extends JPanel{
 	public double[] parametersWave;
 	public double[] parametersPotential;
 	public boolean[] checkList;
+	private JSlider sliderV0,sliderEnergy,sliderMass,sliderSigma,sliderWaveX0,sliderLength,sliderA,sliderPotentialX0;
+	private JLabel lblV0,lblEnergy,lblMass,lblSigma,lblWaveX0,lblLength,lblA,lblPotentialX0;
 	
 	
 	OptionPanel(){
@@ -48,10 +51,10 @@ public class OptionPanel  extends JPanel{
 		//Labels and sliders
 		
 		//Energy label
-		final JLabel lblEnergy = new JLabel("Energy:...MeV");
+		lblEnergy = new JLabel("Energy:...MeV");
 		add(lblEnergy, "cell 0 0,alignx center");
 		//Energy slider
-		final JSlider sliderEnergy = new JSlider();
+		sliderEnergy = new JSlider();
 		sliderEnergy.setMinorTickSpacing(1);
 		sliderEnergy.setValue(0);
 		sliderEnergy.setSnapToTicks(true);
@@ -60,10 +63,10 @@ public class OptionPanel  extends JPanel{
 		add(sliderEnergy, "cell 0 1,growx");
 		
 		//Mass label
-		final JLabel lblMass = new JLabel("Mass:...GeV/c^2");
+		lblMass = new JLabel("Mass:...GeV/c^2");
 		add(lblMass, "cell 0 2,alignx center");
 		//Mass slider
-		final JSlider sliderMass = new JSlider();
+		sliderMass = new JSlider();
 		sliderMass.setMinimum(1);
 		sliderMass.setValue(0);
 		sliderMass.setSnapToTicks(true);
@@ -73,10 +76,10 @@ public class OptionPanel  extends JPanel{
 		add(sliderMass, "cell 0 3,growx");
 		
 		//Sigma label
-		final JLabel lblSigma = new JLabel("Sigma:...");
+		lblSigma = new JLabel("Sigma:...");
 		add(lblSigma, "cell 0 4,alignx center");
 		//Sigma slider
-		final JSlider sliderSigma = new JSlider();
+		sliderSigma = new JSlider();
 		sliderSigma.setMaximum(1000);
 		sliderSigma.setMinimum(1);
 		sliderSigma.setValue(0);
@@ -87,10 +90,10 @@ public class OptionPanel  extends JPanel{
 		add(sliderSigma, "cell 0 5,growx");
 		
 		// Initial position of wave label
-		final JLabel lblWaveX0 = new JLabel("x0:...fm");
+		lblWaveX0 = new JLabel("x0:...fm");
 		add(lblWaveX0, "cell 0 6,alignx center");
 		//Initial position of wave slider
-		final JSlider sliderWaveX0 = new JSlider();
+		sliderWaveX0 = new JSlider();
 		sliderWaveX0.setValue(0);
 		sliderWaveX0.setSnapToTicks(true);
 		sliderWaveX0.setPaintTicks(true);
@@ -99,10 +102,10 @@ public class OptionPanel  extends JPanel{
 		add(sliderWaveX0, "cell 0 7,growx");
 		
 		//Length label
-		final JLabel lblLength = new JLabel("Length: ... fm");
+		lblLength = new JLabel("Length: ... fm");
 		add(lblLength, "cell 0 8,alignx center");
 		//Length slider
-		final JSlider sliderLength = new JSlider();
+		sliderLength = new JSlider();
 		sliderLength.setMinimum(20);
 		sliderLength.setValue(0);
 		sliderLength.setSnapToTicks(true);
@@ -112,12 +115,12 @@ public class OptionPanel  extends JPanel{
 		add(sliderLength, "cell 0 9,growx");
 		
 		//Potential value label
-		final JLabel lblV0 = new JLabel("v0:...MeV");
+		 lblV0 = new JLabel("v0:...MeV");
 		add(lblV0, "cell 0 10,alignx center");
 		//Potential value slider
-		final JSlider sliderV0 = new JSlider();
-		sliderV0.setMinimum(-10);
-		sliderV0.setMaximum(10);
+		 sliderV0 = new JSlider();
+		sliderV0.setMinimum(-20);
+		sliderV0.setMaximum(20);
 		sliderV0.setValue(0);
 		sliderV0.setSnapToTicks(true);
 		sliderV0.setPaintTicks(true);
@@ -126,10 +129,10 @@ public class OptionPanel  extends JPanel{
 		add(sliderV0, "cell 0 11,growx");
 		
 		//Initial potential position
-		final JLabel lblPotentialX0 = new JLabel("x0:...fm");
+		 lblPotentialX0 = new JLabel("x0:...fm");
 		add(lblPotentialX0, "cell 0 12,alignx center");
 		//Initial potential position slider
-		final JSlider sliderPotentialX0 = new JSlider();
+		 sliderPotentialX0 = new JSlider();
 		sliderPotentialX0.setValue(0);
 		sliderPotentialX0.setSnapToTicks(true);
 		sliderPotentialX0.setPaintTicks(true);
@@ -138,10 +141,10 @@ public class OptionPanel  extends JPanel{
 		add(sliderPotentialX0, "cell 0 13,growx");
 		
 		//Range of potential barrier position label
-		final JLabel lblA = new JLabel("a:...fm");
+		lblA = new JLabel("a:...fm");
 		add(lblA, "cell 0 14,alignx center");
 		//Range of potential barrier slider
-		final JSlider sliderA = new JSlider();
+		sliderA = new JSlider();
 		sliderA.setValue(0);
 		sliderA.setSnapToTicks(true);
 		sliderA.setPaintTicks(true);
@@ -155,7 +158,7 @@ public class OptionPanel  extends JPanel{
 		sliderV0.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent arg0) {
 				parametersPotential[0]=(double)sliderV0.getValue();
-				lblV0.setText("V0: "+sliderV0.getValue()+" eV");
+				lblV0.setText("V0: "+sliderV0.getValue()+" MeV");
 				checkList[4]=true;
 				
 			}}
@@ -185,8 +188,8 @@ public class OptionPanel  extends JPanel{
 		//Energy value slider listener
 		sliderEnergy.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent arg0) {
-				parametersWave[0]=(double)sliderEnergy.getValue()*0.2;
-				lblEnergy.setText(String.format("Energy: %.1f  MeV/c^2", sliderEnergy.getValue()*0.05));
+				parametersWave[0]=(double)sliderEnergy.getValue()*0.02;
+				lblEnergy.setText(String.format("Energy: %.1f  MeV/c^2", sliderEnergy.getValue()*0.02));
 				checkList[0]=true;
 				
 			}}
@@ -235,6 +238,48 @@ public class OptionPanel  extends JPanel{
 	 * @param null
 	 * @return boolean(true if its ready, false if its not)
 	 */
+		public void setVariables(int[] variables1, int[] variables2){
+		
+		parametersPotential[0]=(double)variables1[0];
+		sliderV0.setValue(variables1[0]);
+		lblV0.setText("V0: "+sliderV0.getValue()+" MeV");
+		checkList[4]=true;
+		parametersPotential[1]=(double)variables1[1];
+		sliderPotentialX0.setValue(variables1[1]);
+		lblPotentialX0.setText("X0: "+sliderPotentialX0.getValue()+" fm");
+		checkList[5]=true;
+		parametersPotential[2]=(double)(variables1[2]);
+		sliderA.setValue(variables1[2]);
+		lblA.setText("a: "+sliderA.getValue()+" fm");
+		checkList[6]=true;
+		parametersWave[0]=(double)(variables2[0]*0.05);
+		sliderEnergy.setValue(variables2[0]);
+		lblEnergy.setText(String.format("Energy: %.1f  MeV/c^2", sliderEnergy.getValue()*0.05));
+		checkList[0]=true;
+		
+		parametersWave[1]=(double)(variables2[1]*0.1);
+		sliderMass.setValue(variables2[1]);
+    	lblMass.setText(String.format("Mass: %.1f  GeV/c^2", sliderMass.getValue()*0.1));
+		checkList[1]=true;		
+			
+		parametersWave[2]=(double)(variables2[2]);
+		sliderSigma.setValue(variables2[2]);
+		lblSigma.setText("Sigma: "+parametersWave[2]);
+		checkList[2]=true;		
+				
+		parametersWave[3]=(double)variables2[3];
+		sliderWaveX0.setValue(variables2[3]);
+		lblWaveX0.setText(String.format("x0: "+sliderWaveX0.getValue()+" fm"));
+		checkList[3]=true;
+													
+		parametersWave[4]=(double)variables2[4];
+		sliderLength.setValue(variables2[4]);
+		lblLength.setText("Length: "+parametersWave[4]+" fm");
+		checkList[7]=true;
+						
+		
+		
+	}
 	
 	public boolean ready(){
 		for(boolean b : checkList) if(!b) return false;
@@ -260,6 +305,7 @@ public class OptionPanel  extends JPanel{
 	}
 	
 	
+	
 	/*
 	 * @author Micha³ Murawski
 	 * Main method which provides test.
@@ -267,18 +313,20 @@ public class OptionPanel  extends JPanel{
 	
 	
 	static public void  main(String[] args){
-		SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-            	Locale currentLocale=new Locale("en","GB");
-                JFrame frame = new JFrame("Test");
-                OptionPanel p=new OptionPanel();
-				frame.getContentPane().add(p);
-                frame.setSize(450, 480);
-                frame.setVisible(true);
-                System.out.println(p.ready());
-            }
-        });
+//		SwingUtilities.invokeLater(new Runnable() {
+  //          @Override
+//           public void run() {
+ //           	Locale currentLocale=new Locale("en","GB");
+ //               JFrame frame = new JFrame("Test");
+  //              OptionPanel p=new OptionPanel();
+//				frame.getContentPane().add(p);
+ //               frame.setSize(450, 480);
+ //               frame.setVisible(true);
+  //              System.out.println(p.ready());
+  //              p.setVariables(new int[]{1,1,1}, new int[]{1,1,1,1,1});
+  //              System.out.println(p.ready());
+   //         }
+    //    });
 		
 		
 		

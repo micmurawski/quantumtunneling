@@ -248,7 +248,7 @@ public class WaveFunction{
 	public XYSeries seriesPotential(){
 		XYSeries data= new XYSeries("Potential",false);
 		for(int ii=0;ii<N+1;ii++)
-			data.add(ii*dx,this.getPotential(ii)*0.01);
+			data.add(ii*dx,this.getPotential(ii)*0.05);
 		return data;}
 	
 	public double[] getPotentialTable(){

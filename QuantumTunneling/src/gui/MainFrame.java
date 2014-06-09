@@ -27,6 +27,14 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
+import javax.swing.JMenuBar;
+import java.awt.Choice;
+import java.awt.List;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
+import javax.swing.JMenuItem;
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JMenu;
 
 public class MainFrame extends JFrame{
 	/*
@@ -42,7 +50,7 @@ public class MainFrame extends JFrame{
 	private static final long serialVersionUID = 1L;
 	protected static final int EXIT_ON_CLOSE = 0;
 	public ChartPanel chartContainer;
-	final OptionPanel options;
+	OptionPanel options;
 	public WaveFunction f;
 	boolean isRunning,isReady,isBarrier,isOscillator;
 	JPanel panelContainer;
@@ -51,29 +59,15 @@ public class MainFrame extends JFrame{
 	AnimationProvider provider;
 	Timer timer;
 	SwingWorker<JFreeChart,Void> worker;
+	JButton btnSet;
+	JRadioButton rdbtnHarmonicOscillatorPotential, rdbtnBarrieraPotential;
+	JMenuItem mntmSquareBarriera, mntmOscillator;
 	private Executor executor=Executors.newCachedThreadPool();
 	
 	
 	public MainFrame(){
 		
-		
-		f=new WaveFunction(new double[]{10,3,200,10,100});
-		f.setPotential(new double[]{0,0,0});
-		chart=plotter.plot(f.seriesWave(),
-				f.seriesPotential(), 
-				0, 
-				"time: 0.0 fs", 
-				100,
-				-0.3,
-				1,
-				"X", 
-				"Y");
-		isRunning=false;
-		isBarrier=true;
-		isReady=true;
-		
-		
-		getContentPane().setLayout(new MigLayout("", "[360.00][grow]", "[435.00][41.00][][][]"));
+		getContentPane().setLayout(new MigLayout("", "[360.00][grow]", "[435.00][41.00][43.00][][]"));
 		
 		options = new OptionPanel();
 		getContentPane().add(options, "cell 0 0,grow");
@@ -114,19 +108,12 @@ public class MainFrame extends JFrame{
 		});
 		getContentPane().add(btnPause, "cell 0 1,alignx center");
 		
-		JButton btnStop = new JButton("Stop");
-		btnStop.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				isRunning=false;
-				isReady=false;
-			}
-		});
-		getContentPane().add(btnStop, "cell 0 1,alignx center");
-		
-		JButton btnSet = new JButton("Set");
+		btnSet = new JButton("Reset");
 		btnSet.addActionListener(new ActionListener() {
 			@SuppressWarnings("static-access")
 			public void actionPerformed(ActionEvent arg0) {
+				isRunning=false;
+				isReady=false;
 				if(!isReady&&options.ready()){
 				f=new WaveFunction(options.getVariablesWave());
 				if(isBarrier){
@@ -142,8 +129,8 @@ public class MainFrame extends JFrame{
 			}
 		});
 		getContentPane().add(btnSet, "cell 0 1");
-		final JRadioButton rdbtnBarrieraPotential = new JRadioButton("Barriera potential");
-		final JRadioButton rdbtnHarmonicOscillatorPotential = new JRadioButton("Harmonic oscillator potential");
+		rdbtnBarrieraPotential = new JRadioButton("Barriera potential");
+		rdbtnHarmonicOscillatorPotential = new JRadioButton("Harmonic oscillator potential");
 		rdbtnHarmonicOscillatorPotential.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				isOscillator=true;
@@ -167,6 +154,32 @@ public class MainFrame extends JFrame{
 		final JLabel lblProbability = new JLabel("0.0");
 		getContentPane().add(lblProbability, "cell 1 2,alignx center");
 		
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		JMenu mnDefaultSettings = new JMenu("Default settings");
+		menuBar.add(mnDefaultSettings);
+		
+		mntmSquareBarriera = new JMenuItem("Square barriera");
+		mntmSquareBarriera.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				rdbtnBarrieraPotential.doClick();
+				options.setVariables(new int[]{3,25,1},new int[]{100,20,10,10,50});
+				btnSet.doClick();
+			}
+		});
+		mnDefaultSettings.add(mntmSquareBarriera);
+		
+		mntmOscillator = new JMenuItem("Oscillator");
+		mntmOscillator.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				rdbtnHarmonicOscillatorPotential.doClick();
+				options.setVariables(new int[]{0,15,1},new int[]{100,10,10,15,30});
+				btnSet.doClick();
+			}
+		});
+		mnDefaultSettings.add(mntmOscillator);
+		
 		
 		
 		timer = new Timer(25, new ActionListener() {
@@ -181,20 +194,13 @@ public class MainFrame extends JFrame{
 						getContentPane().revalidate();
 						getContentPane().repaint();
 						
-						
-						
-						
-						
-						
-						
-		
 						return null;
 					}
 					protected void done(){
 						getContentPane().remove(chartContainer);
 						chartContainer = new ChartPanel(plotter.plot(f.seriesWave(), 
 								f.seriesPotential(),slider.getValue(), 
-								"time: "+new DecimalFormat("00000.00").format(f.getTime()), 
+								"time: "+new DecimalFormat("00000.00").format(f.getTime())+" fs", 
 								f.getLength(),
 								-0.3,
 								1,
@@ -205,7 +211,7 @@ public class MainFrame extends JFrame{
 						getContentPane().add(chartContainer, "cell 1 0,grow");
 						
 						
-						lblProbability.setText(new DecimalFormat("0.00").format(f.integration(slider.getValue())));
+						lblProbability.setText("Probability of transition: "+new DecimalFormat("0.00").format(f.integration(slider.getValue())));
 						
 						}
 		    		
@@ -220,6 +226,21 @@ public class MainFrame extends JFrame{
 		
 		
 		timer.start();
+		
+		options.setVariables(new int[]{0,0,0},new int[]{100,20,30,7,15});
+		btnSet.doClick();
+		chart=plotter.plot(f.seriesWave(),
+				f.seriesPotential(), 
+				0, 
+				"time: 0.0 fs", 
+				100,
+				-0.3,
+				1,
+				"X", 
+				"Y");
+		isRunning=false;
+		isBarrier=true;
+		isReady=true;
 		
 		
 		
@@ -239,6 +260,7 @@ public class MainFrame extends JFrame{
 	              MainFrame program= new MainFrame();
 	              program.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	              program.setSize(1200, 600);
+	              program.setTitle("Quantum Tunneling");
 	              program.setVisible(true);
 	          }
 	      });
