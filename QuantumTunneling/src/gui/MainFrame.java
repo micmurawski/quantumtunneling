@@ -35,6 +35,7 @@ import java.awt.event.ItemEvent;
 import javax.swing.JMenuItem;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
+import javax.swing.JComboBox;
 
 public class MainFrame extends JFrame{
 	/*
@@ -67,7 +68,7 @@ public class MainFrame extends JFrame{
 	
 	public MainFrame(){
 		
-		getContentPane().setLayout(new MigLayout("", "[360.00][grow]", "[435.00][41.00][43.00][][]"));
+		getContentPane().setLayout(new MigLayout("", "[360.00][grow]", "[435.00][41.00][43.00][][][]"));
 		
 		options = new OptionPanel();
 		getContentPane().add(options, "cell 0 0,grow");
@@ -164,7 +165,7 @@ public class MainFrame extends JFrame{
 		mntmSquareBarriera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				rdbtnBarrieraPotential.doClick();
-				options.setVariables(new int[]{3,25,1},new int[]{100,20,10,10,50});
+				options.setVariables(new int[]{3,25,1},new int[]{100,37,100,10,50});
 				btnSet.doClick();
 			}
 		});
