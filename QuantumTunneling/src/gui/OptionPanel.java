@@ -1,22 +1,14 @@
 package gui;
 
-import java.util.Locale;
 
 import javax.swing.JPanel;
 
 import net.miginfocom.swing.MigLayout;
 
-import javax.swing.JFrame;
 import javax.swing.JSlider;
 import javax.swing.JLabel;
-import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import javax.swing.plaf.SliderUI;
-import javax.swing.JButton;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 
 public class OptionPanel  extends JPanel{
@@ -310,27 +302,6 @@ public class OptionPanel  extends JPanel{
 	 * @author Micha³ Murawski
 	 * Main method which provides test.
 	 */
-	
-	
-	static public void  main(String[] args){
-//		SwingUtilities.invokeLater(new Runnable() {
-  //          @Override
-//           public void run() {
- //           	Locale currentLocale=new Locale("en","GB");
- //               JFrame frame = new JFrame("Test");
-  //              OptionPanel p=new OptionPanel();
-//				frame.getContentPane().add(p);
- //               frame.setSize(450, 480);
- //               frame.setVisible(true);
-  //              System.out.println(p.ready());
-  //              p.setVariables(new int[]{1,1,1}, new int[]{1,1,1,1,1});
-  //              System.out.println(p.ready());
-   //         }
-    //    });
-		
-		
-		
-	}
 
 	
 }

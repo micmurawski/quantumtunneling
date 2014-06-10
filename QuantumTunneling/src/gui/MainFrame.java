@@ -1,7 +1,6 @@
 package gui;
 
 import java.text.DecimalFormat;
-import java.util.Collections;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.concurrent.Executor;
@@ -28,14 +27,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JMenuBar;
-import java.awt.Choice;
-import java.awt.List;
-import java.awt.event.ItemListener;
-import java.awt.event.ItemEvent;
 import javax.swing.JMenuItem;
-import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
-import javax.swing.JComboBox;
+
 
 public class MainFrame extends JFrame{
 	/*
@@ -57,7 +51,6 @@ public class MainFrame extends JFrame{
 	JPanel panelContainer;
 	JFreeChart chart;
 	Plotter plotter= new Plotter();
-	AnimationProvider provider;
 	Timer timer;
 	SwingWorker<JFreeChart,Void> worker;
 	JButton btnSet;
