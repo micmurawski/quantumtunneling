@@ -33,7 +33,7 @@ import javax.swing.JMenu;
 
 public class MainFrame extends JFrame{
 	/*
-	 * @author Micha³ Murawski
+	 * @author Michaï¿½ Murawski
 	 * @param
 	 * @return
 	 * This class provides applying all classes in JFrame.
@@ -158,7 +158,7 @@ public class MainFrame extends JFrame{
 		mntmSquareBarriera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				rdbtnBarrieraPotential.doClick();
-				options.setVariables(new int[]{3,25,1},new int[]{100,37,100,10,50});
+				options.setVariables(new int[]{3,25,1},new int[]{80,37,100,10,50});
 				btnSet.doClick();
 			}
 		});
@@ -168,7 +168,7 @@ public class MainFrame extends JFrame{
 		mntmOscillator.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				rdbtnHarmonicOscillatorPotential.doClick();
-				options.setVariables(new int[]{0,15,1},new int[]{100,10,10,15,30});
+				options.setVariables(new int[]{0,15,1},new int[]{50,10,10,15,30});
 				btnSet.doClick();
 			}
 		});
@@ -221,7 +221,7 @@ public class MainFrame extends JFrame{
 		
 		timer.start();
 		
-		options.setVariables(new int[]{0,0,0},new int[]{100,20,30,7,15});
+		options.setVariables(new int[]{0,0,0},new int[]{50,20,30,7,15});
 		btnSet.doClick();
 		chart=plotter.plot(f.seriesWave(),
 				f.seriesPotential(), 

@@ -47,9 +47,12 @@ public class WaveFunction{
  */
 	
 	 public WaveFunction(double[] parameters){
+		 /**
+		  * parameters: [energy,mass,length,x0]
+		  * 
+		  */
 		dx=0.05;
 		dt=0.05;
-		 //[energy,mass,length,x0]
 		this.L=parameters[4];
 		this.N=(int)(parameters[4]/dx);
 		this.m=parameters[1];
@@ -159,6 +162,10 @@ public class WaveFunction{
 	  */
 	
 	public void setPotential(double[] parameters){
+		/**
+		 * parameters: 
+		 * [v0 constant,x0 constant, a constant]
+		 */
 		this.potential[0]=1e5;
 		this.potential[N]=1e5;
 		for(int ii=1;ii<this.N;ii++){
@@ -182,7 +189,10 @@ public class WaveFunction{
 	
 	
 	public void setPotential2(double[] parameters){
-		//[v0,x0,a]
+		/**
+		 * parameters: 
+		 * [v0 constant,x0 constant, k constant]
+		 */
 		for(int ii=1;ii<this.N;ii++){
 			potential[ii]=parameters[0]+0.5*(parameters[2]*((ii*dx)-parameters[1])*((ii*dx)-parameters[1]));
 			}

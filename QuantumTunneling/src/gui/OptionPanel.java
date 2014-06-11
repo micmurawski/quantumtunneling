@@ -14,7 +14,7 @@ import javax.swing.event.ChangeListener;
 public class OptionPanel  extends JPanel{
 	
 	/*
-	 * @author Micha³ Murawski
+	 * @author Michaï¿½ Murawski
 	 * @param
 	 * @return
 	 * This class extends JPanel to provide element of GUI which takes all
@@ -180,8 +180,8 @@ public class OptionPanel  extends JPanel{
 		//Energy value slider listener
 		sliderEnergy.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent arg0) {
-				parametersWave[0]=(double)sliderEnergy.getValue()*0.02;
-				lblEnergy.setText(String.format("Energy: %.1f  MeV/c^2", sliderEnergy.getValue()*0.02));
+				parametersWave[0]=(double)sliderEnergy.getValue()*0.05;
+				lblEnergy.setText(String.format("Energy: %.1f  MeV/c^2", sliderEnergy.getValue()*0.05));
 				checkList[0]=true;
 				
 			}}
@@ -226,7 +226,7 @@ public class OptionPanel  extends JPanel{
 	}
 	
 	/*
-	 * @author Micha³ Murawski
+	 * @author Michaï¿½ Murawski
 	 * @param null
 	 * @return boolean(true if its ready, false if its not)
 	 */
@@ -279,7 +279,7 @@ public class OptionPanel  extends JPanel{
 	}
 	
 	/*
-	 * @author Micha³ Murawski
+	 * @author Michaï¿½ Murawski
 	 * @param null
 	 * @return table(double)
 	 * 
@@ -299,7 +299,7 @@ public class OptionPanel  extends JPanel{
 	
 	
 	/*
-	 * @author Micha³ Murawski
+	 * @author Michaï¿½ Murawski
 	 * Main method which provides test.
 	 */
 
