@@ -261,24 +261,4 @@ public class WaveFunction{
 		return potential;
 	}
 	
-	
-	
-public static void main(String[] args){
-	WaveFunction f=new WaveFunction(new double[]{5.5,3.72,100,15});
-	f.setPotential(new double[]{10,50,5});
-	//WaveFunction test =new WaveFunction(4, 1, 1, 10,100);
-	//test.setPotential(50, 10, 10);
-	//test.evolution();
-	//System.out.println("beta"+test.beta);
-	//System.out.println("gamma: "+test.gamma);
-	//System.out.println("U: "+test.U);
-	//test.evolution();
-	//System.out.println("norm"+test.checkNorm());
-	//System.out.println("U: "+test.U);
-	//System.out.println(test.getProbabilityDensity(100)+" "+test.N+" "+test.gamma+" \n"+test.alpha);
-	//for(int i=1;i<test.N;i++)
-	//System.out.println(i+"..."+test.getProbabilityDensity(i));
-}
-	
-
 }
