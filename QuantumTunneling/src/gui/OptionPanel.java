@@ -231,7 +231,9 @@ public class OptionPanel  extends JPanel{
 	 * @return boolean(true if its ready, false if its not)
 	 */
 		public void setVariables(int[] variables1, int[] variables2){
-		
+			
+		//variables1{V0,X0,A} potential
+		//variables2{energy,mass,sigma,x0,length} wave
 		parametersPotential[0]=(double)variables1[0];
 		sliderV0.setValue(variables1[0]);
 		lblV0.setText("V0: "+sliderV0.getValue()+" MeV");
