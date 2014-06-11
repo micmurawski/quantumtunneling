@@ -179,8 +179,8 @@ public class WaveFunction{
 				}else{
 					this.potential[ii]=0.0;
 				}
-
 			}
+		
 		for(int jj=0;jj<this.N;jj++){
 			beta[jj]=new Complex(1,0);
 			beta[jj]=beta[jj].minus(alpha.times(2));

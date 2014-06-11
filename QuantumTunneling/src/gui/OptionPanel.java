@@ -107,10 +107,10 @@ public class OptionPanel  extends JPanel{
 		add(sliderLength, "cell 0 9,growx");
 		
 		//Potential value label
-		 lblV0 = new JLabel("v0:...MeV");
+		lblV0 = new JLabel("v0:...MeV");
 		add(lblV0, "cell 0 10,alignx center");
 		//Potential value slider
-		 sliderV0 = new JSlider();
+		sliderV0 = new JSlider();
 		sliderV0.setMinimum(-20);
 		sliderV0.setMaximum(20);
 		sliderV0.setValue(0);
@@ -121,10 +121,10 @@ public class OptionPanel  extends JPanel{
 		add(sliderV0, "cell 0 11,growx");
 		
 		//Initial potential position
-		 lblPotentialX0 = new JLabel("x0:...fm");
+		lblPotentialX0 = new JLabel("x0:...fm");
 		add(lblPotentialX0, "cell 0 12,alignx center");
 		//Initial potential position slider
-		 sliderPotentialX0 = new JSlider();
+		sliderPotentialX0 = new JSlider();
 		sliderPotentialX0.setValue(0);
 		sliderPotentialX0.setSnapToTicks(true);
 		sliderPotentialX0.setPaintTicks(true);
@@ -236,14 +236,17 @@ public class OptionPanel  extends JPanel{
 		sliderV0.setValue(variables1[0]);
 		lblV0.setText("V0: "+sliderV0.getValue()+" MeV");
 		checkList[4]=true;
+		
 		parametersPotential[1]=(double)variables1[1];
 		sliderPotentialX0.setValue(variables1[1]);
 		lblPotentialX0.setText("X0: "+sliderPotentialX0.getValue()+" fm");
 		checkList[5]=true;
+		
 		parametersPotential[2]=(double)(variables1[2]);
 		sliderA.setValue(variables1[2]);
 		lblA.setText("a: "+sliderA.getValue()+" fm");
 		checkList[6]=true;
+		
 		parametersWave[0]=(double)(variables2[0]*0.05);
 		sliderEnergy.setValue(variables2[0]);
 		lblEnergy.setText(String.format("Energy: %.1f  MeV/c^2", sliderEnergy.getValue()*0.05));
@@ -296,12 +299,5 @@ public class OptionPanel  extends JPanel{
 		return parametersWave;
 	}
 	
-	
-	
-	/*
-	 * @author Micha� Murawski
-	 * Main method which provides test.
-	 */
-
-	
+		
 }
